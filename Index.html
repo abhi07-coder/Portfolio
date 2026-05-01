@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abhishek Kumar — Portfolio</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ══ NAV ══ -->
+  <nav id="navbar">
+    <div class="logo">AK.</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#certs">Certs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section id="hero">
+    <div class="hero-glow glow-1"></div>
+    <div class="hero-glow glow-2"></div>
+
+    <div class="hero-layout">
+      <!-- LEFT: Text -->
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span></span>
+          Open to Internships &amp; Collaborations
+        </div>
+        <h1>
+          <span class="name-line">Abhishek</span>
+          <span class="name-line gradient-text">Kumar</span>
+        </h1>
+        <p class="hero-sub">
+          2nd-year CSE student at Gautam Buddha University, exploring the frontiers of
+          <strong>AI, Machine Learning &amp; Data Science</strong>.
+          Currently building as a Full Stack Engineer at Snoufai.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Let's Connect →</a>
+          <a href="#skills"  class="btn-outline">View My Skills</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Photo -->
+      <div class="hero-photo-col">
+        <div class="hero-photo-frame">
+          <!--
+            ══ HOW TO ADD YOUR PHOTO ══
+            1. Save your photo as  photo.jpg  in the SAME folder as index.html
+            2. Delete the <div class="hero-photo-placeholder"> block below
+            3. Uncomment the <img> line beneath it
+          -->
+          <!-- <div class="hero-photo-placeholder">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <circle cx="32" cy="22" r="13" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
+              <path d="M6 60c0-14.359 11.641-26 26-26s26 11.641 26 26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
+            </svg>
+            <p>Save <code>photo.jpg</code><br/>in this folder</p>
+          </div> -->
+          <img src="image/myphoto/photo.jpg" alt="Abhishek Kumar" class="hero-photo-img" />
+
+          <!-- decorative corner brackets -->
+          <span class="pc tl"></span>
+          <span class="pc tr"></span>
+          <span class="pc bl"></span>
+          <span class="pc br"></span>
+        </div>
+
+        <!-- small floating labels -->
+        <div class="photo-tag pt-top">Full Stack Eng.</div>
+        <div class="photo-tag pt-bot">GBU · CSE · 2029</div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      SCROLL
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══ -->
+  <section id="about">
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <div class="section-label">About Me</div>
+        <div class="section-title">Learning by Doing</div>
+        <p>I'm a passionate <strong>Integrated B.Tech-M.Tech (CSE)</strong> student on a mission to master Data Science, AI, and Machine Learning. I believe the best way to learn is to build — real projects, real problems, real solutions.</p>
+        <p>Currently strengthening my foundations in <strong>Python, Java, C++, statistics, and problem-solving</strong> while gaining hands-on experience as a Full Stack Engineer.</p>
+        <p>My long-term goal is to become a skilled <strong>AI/Data Scientist</strong> and contribute to data-driven innovations that make a real impact.</p>
+        <div class="stats-row">
+          <div class="stat">
+            <div class="num">2nd</div>
+            <div class="lbl">Year of B.Tech</div>
+          </div>
+          <div class="stat">
+            <div class="num">2+</div>
+            <div class="lbl">Certifications</div>
+          </div>
+          <div class="stat">
+            <div class="num">1</div>
+            <div class="lbl">Work Experience</div>
+          </div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-row">
+          <div class="info-icon">🎓</div>
+          <div>
+            <strong>Gautam Buddha University</strong>
+            <span>B.Tech-M.Tech (CSE) · 2024–2029</span>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">💼</div>
+          <div>
+            <strong>Full Stack Engineer</strong>
+            <span>Snoufai Pvt. Ltd. · March 2026–Present</span>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div>
+            <strong>Location</strong>
+            <span>Greater Delhi Area, India</span>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">✉️</div>
+          <div>
+            <strong>Email</strong>
+            <span>abhishekkumar788477@gmail.com</span>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🎯</div>
+          <div>
+            <strong>Goal</strong>
+            <span>AI Engineer / Data Scientist</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SKILLS ══ -->
+  <section id="skills">
+    <div class="section-label reveal">Skills</div>
+    <div class="section-title reveal">What I Work With</div>
+    <div class="skills-grid">
+
+      <div class="skill-card reveal">
+        <div class="skill-card-title">
+          <span class="icon">💻</span> Programming Languages
+        </div>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Java</span>
+          <span class="tag">C</span>
+          <span class="tag">C++</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-title">
+          <span class="icon">🌐</span> Web Development
+        </div>
+        <div class="skill-tags">
+          <span class="tag blue">HTML</span>
+          <span class="tag blue">CSS</span>
+          <span class="tag blue">JavaScript</span>
+          <span class="tag blue">Full Stack</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-title">
+          <span class="icon">📊</span> Data &amp; AI
+        </div>
+        <div class="skill-tags">
+          <span class="tag">Data Analysis</span>
+          <span class="tag">MS Excel</span>
+          <span class="tag">AI Fundamentals</span>
+          <span class="tag">GenAI</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-title">
+          <span class="icon">🤝</span> Soft Skills
+        </div>
+        <div class="skill-tags">
+          <span class="tag pink">Teamwork</span>
+          <span class="tag pink">Leadership</span>
+          <span class="tag pink">Communication</span>
+          <span class="tag pink">Time Management</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ EXPERIENCE ══ -->
+  <section id="experience">
+    <div class="section-label reveal">Experience</div>
+    <div class="section-title reveal">Work History</div>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-date">March 2026 – Present</div>
+        <div class="timeline-role">
+          Full Stack Engineer
+          <span class="active-badge">ACTIVE</span>
+        </div>
+        <div class="timeline-company">Snoufai Private Limited · Noida</div>
+        <div class="timeline-desc">
+          Working as a Full Stack Engineer, contributing to product development and
+          applying web technologies in a real-world production environment. Gaining
+          hands-on experience across the stack while collaborating with a professional team.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ EDUCATION ══ -->
+  <section id="education">
+    <div class="section-label reveal">Education</div>
+    <div class="section-title reveal">Academic Background</div>
+    <div class="edu-grid">
+
+      <div class="edu-card reveal">
+        <div class="year-badge">2024 – 2029</div>
+        <h3>Gautam Buddha University</h3>
+        <p>Greater Noida</p>
+        <p class="deg">Integrated B.Tech – M.Tech · Computer Science Engineering</p>
+      </div>
+
+      <div class="edu-card reveal">
+        <div class="year-badge">Completed August 2024</div>
+        <h3>CBSE Senior Secondary</h3>
+        <p>Class 12th</p>
+        <p class="deg">Central Board of Secondary Education</p>
+      </div>
+
+      <div class="edu-card reveal">
+        <div class="year-badge">Completed August 2021</div>
+        <h3>CBSE Secondary</h3>
+        <p>Class 10th</p>
+        <p class="deg">Central Board of Secondary Education</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ CERTIFICATIONS ══ -->
+  <section id="certs">
+    <div class="section-label reveal">Certifications</div>
+    <div class="section-title reveal">Credentials</div>
+    <div class="cert-grid">
+
+      <div class="cert-card reveal">
+        <div class="cert-icon">🤖</div>
+        <div>
+          <h4>Elements of AI</h4>
+          <p>University of Helsinki &amp; MinnaLearn · Certified in foundational AI concepts and applications</p>
+        </div>
+      </div>
+
+      <div class="cert-card reveal">
+        <div class="cert-icon">📈</div>
+        <div>
+          <h4>GenAI Powered Data Analytics</h4>
+          <p>Tata Job Simulation · Hands-on experience with AI-driven data analytics workflows</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ══ -->
+  <section id="contact">
+    <div class="contact-wrapper">
+      <div class="section-label reveal">Contact</div>
+      <div class="section-title reveal">Get In Touch</div>
+      <p class="contact-desc reveal">
+        I'm actively looking for internship opportunities, project collaborations,
+        and peer connections. Feel free to reach out!
+      </p>
+      <form class="contact-form reveal" id="contactForm">
+        <div class="form-group">
+          <label for="fname">Your Name</label>
+          <input type="text" id="fname" placeholder="John Doe" required />
+        </div>
+        <div class="form-group">
+          <label for="femail">Email Address</label>
+          <input type="email" id="femail" placeholder="john@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="fmsg">Message</label>
+          <textarea id="fmsg" placeholder="Tell me about the opportunity or just say hello!" required></textarea>
+        </div>
+        <button type="submit" class="btn-primary btn-full">Send Message →</button>
+        <div id="form-status"></div>
+      </form>
+      <div class="social-links reveal">
+        <a href="https://www.linkedin.com/in/abhishekkumar-36a6a3322" target="_blank" class="social-link sl-linkedin" title="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a href="mailto:abhishekkumar788477@gmail.com" class="social-link sl-email" title="Email">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+        <a href="https://instagram.com/" target="_blank" class="social-link sl-instagram" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://github.com/" target="_blank" class="social-link sl-github" title="GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://facebook.com/" target="_blank" class="social-link sl-facebook" title="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://twitter.com/" target="_blank" class="social-link sl-twitter" title="X / Twitter">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <p>Copyright &#9400; 2026</p>
+    <p>Designed &amp; Built by <span>Abhishek Kumar</span></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
