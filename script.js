@@ -114,11 +114,11 @@ contactForm.addEventListener('submit', function (e) {
 
   /*
    ╔═══════════════════════════════════════════════════════╗
-   ║  TO CONNECT A REAL BACKEND, replace the setTimeout   ║
+   ║  TO CONNECT A REAL BACKEND, replace the setTimeout    ║
    ║  below with one of these options:                     ║
    ║                                                       ║
    ║  A) EmailJS (free, no server):                        ║
-   ║     emailjs.send('SERVICE_ID', 'TEMPLATE_ID', {      ║
+   ║     emailjs.send('SERVICE_ID', 'TEMPLATE_ID', {       ║
    ║       from_name: name,                                ║
    ║       from_email: email,                              ║
    ║       message: message                                ║
@@ -127,8 +127,8 @@ contactForm.addEventListener('submit', function (e) {
    ║  B) Your own API / backend:                           ║
    ║     fetch('/api/contact', {                           ║
    ║       method: 'POST',                                 ║
-   ║       headers: {'Content-Type': 'application/json'}, ║
-   ║       body: JSON.stringify({name, email, message})   ║
+   ║       headers: {'Content-Type': 'application/json'},  ║
+   ║       body: JSON.stringify({name, email, message})    ║
    ║     })                                                ║
    ╚═══════════════════════════════════════════════════════╝
   */
@@ -139,4 +139,79 @@ contactForm.addEventListener('submit', function (e) {
     formStatus.style.color = '#6ee7b7';
     contactForm.reset();
   }, 1200);
+});
+
+/* ─────────────────────────────────────────
+   5. CERTIFICATE MODAL
+───────────────────────────────────────── */
+
+// ── Certificate Data ──
+// Add your certificate details here.
+// For the image: save cert1.jpg / cert2.jpg in the same folder,
+// then set  image: 'cert1.jpg'  (remove the empty string '').
+const certs = [
+  {
+    title:  'Elements of AI',
+    org:    'University of Helsinki & MinnaLearn',
+    image:  '',          // ← replace with 'cert1.jpg' after adding your image
+    desc:   'Completed the Elements of AI online course, covering foundational concepts of Artificial Intelligence including machine learning basics, neural networks, the societal impact of AI, and real-world AI applications. Certified by the University of Helsinki and MinnaLearn.',
+    tags:   ['Artificial Intelligence', 'Machine Learning', 'Neural Networks', 'AI Ethics']
+  },
+  {
+    title:  'GenAI Powered Data Analytics',
+    org:    'Tata Job Simulation',
+    image:  '',          // ← replace with 'cert2.jpg' after adding your image
+    desc:   "Completed Tata's GenAI Powered Data Analytics job simulation, gaining hands-on experience with AI-driven data analytics workflows, generative AI tools, data interpretation, and how businesses leverage AI for decision-making.",
+    tags:   ['GenAI', 'Data Analytics', 'Tata', 'AI Tools', 'Business Intelligence']
+  }
+];
+
+const modal      = document.getElementById('certModal');
+const modalTitle = document.getElementById('certModalTitle');
+const modalOrg   = document.getElementById('certModalOrg');
+const modalDesc  = document.getElementById('certModalDesc');
+const modalTags  = document.getElementById('certModalTags');
+const modalImg   = document.getElementById('certModalImg');
+const modalPlaceholder = document.getElementById('certModalPlaceholder');
+
+function openCert(index) {
+  const cert = certs[index];
+
+  modalTitle.textContent = cert.title;
+  modalOrg.textContent   = cert.org;
+  modalDesc.textContent  = cert.desc;
+
+  // tags
+  modalTags.innerHTML = cert.tags.map(t => `<span>${t}</span>`).join('');
+
+  // image — using CSS classes instead of inline styles
+  if (cert.image) {
+    modalImg.src = cert.image;
+    modalImg.alt = cert.title;
+    modalImg.classList.remove('cert-modal-img--hidden');
+    modalPlaceholder.classList.add('cert-modal-placeholder--hidden');
+  } else {
+    modalImg.classList.add('cert-modal-img--hidden');
+    modalPlaceholder.classList.remove('cert-modal-placeholder--hidden');
+  }
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';  // prevent background scroll
+}
+
+function closeCert(e) {
+  // close only when clicking the dark backdrop (not the box itself)
+  if (e.target === modal) {
+    closeCertBtn();
+  }
+}
+
+function closeCertBtn() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeCertBtn();
 });

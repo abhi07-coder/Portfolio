@@ -63,14 +63,14 @@
             2. Delete the <div class="hero-photo-placeholder"> block below
             3. Uncomment the <img> line beneath it
           -->
-          <!-- <div class="hero-photo-placeholder">
+          <div class="hero-photo-placeholder">
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
               <circle cx="32" cy="22" r="13" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
               <path d="M6 60c0-14.359 11.641-26 26-26s26 11.641 26 26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
             </svg>
             <p>Save <code>photo.jpg</code><br/>in this folder</p>
-          </div> -->
-          <img src="image/myphoto/photo.jpg" alt="Abhishek Kumar" class="hero-photo-img" />
+          </div>
+          <!-- <img src="photo.jpg" alt="Abhishek Kumar" class="hero-photo-img" /> -->
 
           <!-- decorative corner brackets -->
           <span class="pc tl"></span>
@@ -269,24 +269,71 @@
     <div class="section-title reveal">Credentials</div>
     <div class="cert-grid">
 
-      <div class="cert-card reveal">
-        <div class="cert-icon">🤖</div>
-        <div>
+      <!-- ── CERT CARD 1 ── -->
+      <div class="cert-card reveal" onclick="openCert(0)">
+        <div class="cert-thumb">
+          <!--
+            ADD YOUR CERTIFICATE IMAGE:
+            Save it as  cert1.jpg  in the same folder, then replace
+            the <div class="cert-img-placeholder"> with:
+            <img src="cert1.jpg" alt="Elements of AI Certificate" />
+          -->
+          <div class="cert-img-placeholder">
+            <i class="fa-solid fa-certificate"></i>
+          </div>
+        </div>
+        <div class="cert-info">
           <h4>Elements of AI</h4>
-          <p>University of Helsinki &amp; MinnaLearn · Certified in foundational AI concepts and applications</p>
+          <p>University of Helsinki &amp; MinnaLearn</p>
+          <span class="cert-view-btn">View Certificate <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
         </div>
       </div>
 
-      <div class="cert-card reveal">
-        <div class="cert-icon">📈</div>
-        <div>
+      <!-- ── CERT CARD 2 ── -->
+      <div class="cert-card reveal" onclick="openCert(1)">
+        <div class="cert-thumb">
+          <!--
+            ADD YOUR CERTIFICATE IMAGE:
+            Save it as  cert2.jpg  in the same folder, then replace
+            the <div class="cert-img-placeholder"> with:
+            <img src="cert2.jpg" alt="GenAI Data Analytics Certificate" />
+          -->
+          <div class="cert-img-placeholder">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+        </div>
+        <div class="cert-info">
           <h4>GenAI Powered Data Analytics</h4>
-          <p>Tata Job Simulation · Hands-on experience with AI-driven data analytics workflows</p>
+          <p>Tata Job Simulation</p>
+          <span class="cert-view-btn">View Certificate <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
         </div>
       </div>
 
     </div>
   </section>
+
+  <!-- ══ CERTIFICATE POPUP MODAL ══ -->
+  <div class="cert-modal" id="certModal" onclick="closeCert(event)">
+    <div class="cert-modal-box">
+      <button class="cert-modal-close" onclick="closeCertBtn()" title="Close certificate" aria-label="Close certificate">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="cert-modal-img-wrap">
+        <!-- placeholder shown before cert image is added -->
+        <div class="cert-modal-placeholder" id="certModalPlaceholder">
+          <i class="fa-solid fa-certificate"></i>
+          <p>Certificate image will appear here.<br/>Save <code>cert1.jpg</code> / <code>cert2.jpg</code> in your folder.</p>
+        </div>
+        <img src="" alt="" id="certModalImg" class="cert-modal-img cert-modal-img--hidden"/>
+      </div>
+      <div class="cert-modal-body">
+        <h3 id="certModalTitle"></h3>
+        <p  id="certModalOrg" class="cert-modal-org"></p>
+        <p  id="certModalDesc" class="cert-modal-desc"></p>
+        <div class="cert-modal-tags" id="certModalTags"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- ══ CONTACT ══ -->
   <section id="contact">
@@ -314,22 +361,22 @@
         <div id="form-status"></div>
       </form>
       <div class="social-links reveal">
-        <a href="https://www.linkedin.com/in/abhishekkumar-36a6a3322" target="_blank" class="social-link sl-linkedin" title="LinkedIn">
+        <a href="https://www.linkedin.com/in/abhishekkumar-36a6a3322" target="_blank" rel="noopener noreferrer" class="social-link sl-linkedin" title="LinkedIn">
           <i class="fa-brands fa-linkedin-in"></i>
         </a>
         <a href="mailto:abhishekkumar788477@gmail.com" class="social-link sl-email" title="Email">
           <i class="fa-solid fa-envelope"></i>
         </a>
-        <a href="https://instagram.com/" target="_blank" class="social-link sl-instagram" title="Instagram">
+        <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="social-link sl-instagram" title="Instagram">
           <i class="fa-brands fa-instagram"></i>
         </a>
-        <a href="https://github.com/" target="_blank" class="social-link sl-github" title="GitHub">
+        <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="social-link sl-github" title="GitHub">
           <i class="fa-brands fa-github"></i>
         </a>
-        <a href="https://facebook.com/" target="_blank" class="social-link sl-facebook" title="Facebook">
+        <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" class="social-link sl-facebook" title="Facebook">
           <i class="fa-brands fa-facebook-f"></i>
         </a>
-        <a href="https://twitter.com/" target="_blank" class="social-link sl-twitter" title="X / Twitter">
+        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" class="social-link sl-twitter" title="X / Twitter">
           <i class="fa-brands fa-x-twitter"></i>
         </a>
       </div>
