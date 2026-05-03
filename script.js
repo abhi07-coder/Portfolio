@@ -99,31 +99,40 @@ contactForm.addEventListener('submit', function (e) {
   formStatus.textContent = '⏳ Sending...';
   formStatus.style.color = '#64748b';
 
-  /*
-   ╔═══════════════════════════════════════════════════════╗
-   ║  TO CONNECT A REAL BACKEND, replace the setTimeout    ║
-   ║  below with one of these:                             ║
-   ║                                                       ║
-   ║  A) EmailJS (free, no server):                        ║
-   ║     emailjs.send('SERVICE_ID', 'TEMPLATE_ID', {       ║
-   ║       from_name: name, from_email: email,             ║
-   ║       message: message                                ║
-   ║     })                                                ║
-   ║                                                       ║
-   ║  B) Your own API / backend:                           ║
-   ║     fetch('/api/contact', {                           ║
-   ║       method: 'POST',                                 ║
-   ║       headers: {'Content-Type': 'application/json'},  ║
-   ║       body: JSON.stringify({name, email, message})    ║
-   ║     })                                                ║
-   ╚═══════════════════════════════════════════════════════╝
-  */
+  // ── EmailJS Configuration ──────────────────────────────────────────────
+  // Replace these 3 values with your own from emailjs.com:
+  //   → Service ID  : Dashboard → Email Services → your service
+  //   → Template IDs: Dashboard → Email Templates → your templates
+  // ──────────────────────────────────────────────────────────────────────
+  const SERVICE_ID        = 'service_3cghqe8';
+  const NOTIFY_TEMPLATE   = 'template_zx1wryf';    // you receive this
+  const AUTOREPLY_TEMPLATE = 'template_qmdcb8j'; // sender receives this
 
-  setTimeout(() => {
-    formStatus.textContent = `✅ Thanks ${name}! I'll get back to you soon.`;
-    formStatus.style.color = '#6ee7b7';
-    contactForm.reset();
-  }, 1200);
+  const templateParams = {
+    from_name  : name,
+    from_email : email,
+    message    : message,
+    reply_to   : email
+  };
+
+  // Step 1 — Send YOU a notification email
+  emailjs.send(SERVICE_ID, NOTIFY_TEMPLATE, templateParams)
+    .then(() => {
+      // Step 2 — Send the auto-reply to the person who filled the form
+      return emailjs.send(SERVICE_ID, AUTOREPLY_TEMPLATE, templateParams);
+    })
+    .then(() => {
+      // Both emails sent successfully
+      formStatus.textContent = `✅ Message sent! An auto-reply has been sent to ${email}.`;
+      formStatus.style.color = '#6ee7b7';
+      contactForm.reset();
+    })
+    .catch((error) => {
+      // Something went wrong
+      console.error('EmailJS error:', error);
+      formStatus.textContent = '❌ Oops! Something went wrong. Please email me directly.';
+      formStatus.style.color = '#f472b6';
+    });
 });
 
 /* ─────────────────────────────────────────
