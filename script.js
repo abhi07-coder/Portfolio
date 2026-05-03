@@ -71,10 +71,38 @@ document.querySelectorAll('.reveal').forEach((el) => {
 });
 
 /* ─────────────────────────────────────────
-   4. CONTACT FORM — Validation & Submission
+   4. DUPLICATE EMAIL CHECK (localStorage)
+   Stores submitted emails so same address
+   cannot submit the form a second time.
+───────────────────────────────────────── */
+const STORAGE_KEY = 'ak_contacted_emails';
+
+function getContactedEmails() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  } catch (err) {
+    return [];
+  }
+}
+
+function hasAlreadyMessaged(email) {
+  return getContactedEmails().includes(email.toLowerCase());
+}
+
+function saveContactedEmail(email) {
+  const list = getContactedEmails();
+  if (!list.includes(email.toLowerCase())) {
+    list.push(email.toLowerCase());
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  }
+}
+
+/* ─────────────────────────────────────────
+   5. CONTACT FORM — Validation & EmailJS
 ───────────────────────────────────────── */
 const contactForm = document.getElementById('contactForm');
 const formStatus  = document.getElementById('form-status');
+const submitBtn   = contactForm.querySelector('button[type="submit"]');
 
 contactForm.addEventListener('submit', function (e) {
   e.preventDefault();
@@ -83,12 +111,14 @@ contactForm.addEventListener('submit', function (e) {
   const email   = document.getElementById('femail').value.trim();
   const message = document.getElementById('fmsg').value.trim();
 
+  // ── 1. Empty field check ──────────────────────────────────────────────
   if (!name || !email || !message) {
     formStatus.textContent = '⚠️ Please fill in all fields.';
     formStatus.style.color = '#f472b6';
     return;
   }
 
+  // ── 2. Email format check ─────────────────────────────────────────────
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     formStatus.textContent = '⚠️ Please enter a valid email address.';
@@ -96,14 +126,23 @@ contactForm.addEventListener('submit', function (e) {
     return;
   }
 
-  formStatus.textContent = '⏳ Sending...';
+  // ── 3. Duplicate email check ──────────────────────────────────────────
+  if (hasAlreadyMessaged(email)) {
+    formStatus.innerHTML   = `📬 <strong>${email}</strong> already sent me a message. I'll reply to you soon — please be patient!`;
+    formStatus.style.color = '#38bdf8';
+    return;
+  }
+
+  // ── 4. Disable button to prevent double-click ─────────────────────────
+  submitBtn.disabled    = true;
+  submitBtn.textContent = 'Sending…';
+  formStatus.textContent = '⏳ Sending your message...';
   formStatus.style.color = '#64748b';
 
-  // ── EmailJS Configuration ──────────────────────────────────────────────
-  // Replace these 3 values with your own from emailjs.com:
-  //   → Service ID  : Dashboard → Email Services → your service
-  //   → Template IDs: Dashboard → Email Templates → your templates
-  // ──────────────────────────────────────────────────────────────────────
+  // ── 5. EmailJS — sends 2 emails ───────────────────────────────────────
+  //   STEP A: Replace these 3 IDs with your own from emailjs.com
+  //   STEP B: Replace YOUR_PUBLIC_KEY in index.html <head>
+  // ─────────────────────────────────────────────────────────────────────
   const SERVICE_ID        = 'service_3cghqe8';
   const NOTIFY_TEMPLATE   = 'template_zx1wryf';    // you receive this
   const AUTOREPLY_TEMPLATE = 'template_qmdcb8j'; // sender receives this
@@ -115,31 +154,33 @@ contactForm.addEventListener('submit', function (e) {
     reply_to   : email
   };
 
-  // Step 1 — Send YOU a notification email
+  // Send notification to you, then send auto-reply to the visitor
   emailjs.send(SERVICE_ID, NOTIFY_TEMPLATE, templateParams)
+    .then(() => emailjs.send(SERVICE_ID, AUTOREPLY_TEMPLATE, templateParams))
     .then(() => {
-      // Step 2 — Send the auto-reply to the person who filled the form
-      return emailjs.send(SERVICE_ID, AUTOREPLY_TEMPLATE, templateParams);
-    })
-    .then(() => {
-      // Both emails sent successfully
-      formStatus.textContent = `✅ Message sent! An auto-reply has been sent to ${email}.`;
+      // ✅ Success — save email to block future duplicates
+      saveContactedEmail(email);
+      formStatus.innerHTML   = `✅ Message sent! An auto-reply has been sent to <strong>${email}</strong>.`;
       formStatus.style.color = '#6ee7b7';
+      submitBtn.disabled     = false;
+      submitBtn.textContent  = 'Send Message →';
       contactForm.reset();
     })
     .catch((error) => {
-      // Something went wrong
+      // ❌ Error
       console.error('EmailJS error:', error);
-      formStatus.textContent = '❌ Oops! Something went wrong. Please email me directly.';
+      formStatus.textContent = '❌ Something went wrong. Please email me directly at abhishekkumar788477@gmail.com';
       formStatus.style.color = '#f472b6';
+      submitBtn.disabled     = false;
+      submitBtn.textContent  = 'Send Message →';
     });
 });
 
 /* ─────────────────────────────────────────
-   5. CERTIFICATE MODAL
+   6. CERTIFICATE MODAL
 ───────────────────────────────────────── */
 
-// Certificate data — edit title, org, image path, desc and tags here
+// Certificate data — update image paths, desc and tags here
 const certs = [
   {
     title : 'Elements of AI',
@@ -165,7 +206,6 @@ const modalDesc  = document.getElementById('certModalDesc');
 const modalTags  = document.getElementById('certModalTags');
 const modalImg   = document.getElementById('certModalImg');
 
-// Open modal — populate with cert data, show image only
 function openCert(index) {
   const cert = certs[index];
 
@@ -174,13 +214,11 @@ function openCert(index) {
   modalDesc.textContent  = cert.desc;
   modalTags.innerHTML    = cert.tags.map(t => `<span>${t}</span>`).join('');
 
-  // Always show image (no placeholder in modal anymore)
   if (cert.image && cert.image.trim() !== '') {
     modalImg.src = cert.image;
     modalImg.alt = cert.title;
     modalImg.classList.remove('cert-modal-img--hidden');
   } else {
-    // No image set — hide the img entirely
     modalImg.classList.add('cert-modal-img--hidden');
   }
 
@@ -188,28 +226,23 @@ function openCert(index) {
   document.body.style.overflow = 'hidden';
 }
 
-// Close when clicking the X button
 function closeCertModal() {
   modal.classList.remove('open');
   document.body.style.overflow = '';
 }
 
-// Close when clicking the dark backdrop
 modal.addEventListener('click', (e) => {
   if (e.target === modal) closeCertModal();
 });
 
-// Close when clicking the X button
 modalClose.addEventListener('click', closeCertModal);
 
-// Close on Escape key
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && modal.classList.contains('open')) {
     closeCertModal();
   }
 });
 
-// Keyboard accessibility — open cert card with Enter or Space
 document.querySelectorAll('.cert-card').forEach((card, index) => {
   card.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
