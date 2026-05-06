@@ -128,7 +128,7 @@ contactForm.addEventListener('submit', function (e) {
 
   // ── 3. Duplicate email check ──────────────────────────────────────────
   if (hasAlreadyMessaged(email)) {
-    formStatus.innerHTML   = `📬 <strong>${email}</strong> already sent me a message. I'll reply to you soon — please be patient!`;
+    formStatus.innerHTML   = `📬 <strong>${name}</strong> already sent me a message. I'll reply to you soon — please be patient!`;
     formStatus.style.color = '#38bdf8';
     return;
   }
@@ -160,7 +160,7 @@ contactForm.addEventListener('submit', function (e) {
     .then(() => {
       // ✅ Success — save email to block future duplicates
       saveContactedEmail(email);
-      formStatus.innerHTML   = `✅ Message sent! An auto-reply has been sent to <strong>${email}</strong>.`;
+      formStatus.innerHTML   = `✅ Your massage has been sent Successfully. \n I'll respond you soon <strong>${name}</strong>.`;
       formStatus.style.color = '#6ee7b7';
       submitBtn.disabled     = false;
       submitBtn.textContent  = 'Send Message →';
